@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ShieldCheck, Cpu, Database, Network, Sparkles } from 'lucide-react';
+---
+
+<Layout title="Architecture Specification | FlixCart">
+  <div class="max-w-4xl mx-auto px-6 py-12 space-y-12 text-slate-700">
+    
+    <!-- Hero Header -->
+    <div class="text-center space-y-4">
+      <span class="inline-block text-[10px] font-black bg-gradient-to-r from-red-500 via-pink-500 via-blue-500 to-green-500 text-white px-3 py-1 rounded-full uppercase tracking-widest">
+        SYSTEM PROFILE
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        FlixCart High-Performance Spec
+      </h1>
+      <p class="text-sm text-slate-500 max-w-xl mx-auto leading-relaxed">
+        Static site speed combined with reactive simulation state, delivering a gorgeous user interface.
+      </p>
+    </div>
+
+    <!-- Punchy Specs Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <div class="bg-white border border-slate-100 p-6 rounded-2xl space-y-2 hover:shadow-md transition-shadow">
+        <div class="flex items-center gap-2 text-blue-600">
+          <Network className="h-5 w-5" />
+          <h3 class="font-bold text-slate-900 text-base">Micro-Island Sync</h3>
+        </div>
+        <p class="text-xs text-slate-555 leading-relaxed">
+          Static Astro elements communicate dynamically in the browser using custom DOM events, syncing the cart and drawer islands instantly without full redraws.
+        </p>
+      </div>
+
+      <div class="bg-white border border-slate-100 p-6 rounded-2xl space-y-2 hover:shadow-md transition-shadow">
+        <div class="flex items-center gap-2 text-pink-650">
+          <Database className="h-5 w-5" />
+          <h3 class="font-bold text-slate-900 text-base">Client-Side Engine</h3>
+        </div>
+        <p class="text-xs text-slate-555 leading-relaxed">
+          Catalog prices and stock availability overrides are committed to localStorage, syncing custom edits across tabs without server latency.
+        </p>
+      </div>
+
+      <div class="bg-white border border-slate-100 p-6 rounded-2xl space-y-2 hover:shadow-md transition-shadow">
+        <div class="flex items-center gap-2 text-emerald-600">
+          <Cpu className="h-5 w-5" />
+          <h3 class="font-bold text-slate-900 text-base">Vibrant Color UI</h3>
+        </div>
+        <p class="text-xs text-slate-555 leading-relaxed">
+          Unifies yellow, red, green, pink, and light blue across components, creating color-coded tags for faster category filtering.
+        </p>
+      </div>
+
+      <div class="bg-white border border-slate-100 p-6 rounded-2xl space-y-2 hover:shadow-md transition-shadow">
+        <div class="flex items-center gap-2 text-amber-500">
+          <ShieldCheck className="h-5 w-5" />
+          <h3 class="font-bold text-slate-900 text-base">Offline Asset Engine</h3>
+        </div>
+        <p class="text-xs text-slate-555 leading-relaxed">
+          Pre-encoded inline vector shapes ensure visual reliability, resolving broken image errors instantly if networks fail.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Creator Sign-off -->
+    <div class="bg-slate-900 p-6 rounded-2xl text-white text-center space-y-3 relative overflow-hidden shadow-lg">
+      <div class="space-y-1">
+        <h4 class="text-lg font-bold text-white">Lead Systems Architect</h4>
+        <span class="text-[10px] text-brand-400 font-extrabold tracking-widest uppercase">Designed &amp; Engineered by Vishal Rawal</span>
+      </div>
+      <p class="text-xs text-slate-350 leading-relaxed max-w-xl mx-auto">
+        "We built FlixCart to showcase high-performance static compilation combined with zero-latency browser state engines. Highly attractive, responsive, and ready for recruitment reviews."
+      </p>
+    </div>
+
+  </div>
+</Layout>

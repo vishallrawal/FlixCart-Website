@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar';
+import CartDrawer from '../components/CartDrawer';
+import CompareDrawer from '../components/CompareDrawer';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { 
+  title = 'FlixCart | Premium Cinematic Store', 
+  description = 'Experience premium shopping at FlixCart. Buy top quality electronics, fashion, home decor, and fitness essentials with fast shipping.' 
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    
+    <!-- Theme Toggle Helper Script to prevent FOUC -->
+    <script is:inline>
+      const getTheme = () => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return 'light'; // Default to light mode (white background)
+      };
+      
+      const theme = getTheme();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  </head>
+  <body class="bg-ui-light dark:bg-ui-dark text-slate-800 dark:text-slate-100 min-h-screen flex flex-col dark-theme-transition antialiased">
+    <!-- Interactive Header Island -->
+    <Navbar client:load />
+
+    <!-- Interactive Cart Sliding Drawer Island -->
+    <CartDrawer client:load />
+
+    <!-- Floating Compare Products Drawer Island -->
+    <CompareDrawer client:load />
+
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-20">
+      <slot />
+    </main>
+
+    <!-- Static Footer -->
+    <Footer />
+  </body>
+</html>

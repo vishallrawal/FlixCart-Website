@@ -1,0 +1,20 @@
+---
+import { products } from '../../data/products';
+import Layout from '../../layouts/Layout.astro';
+import ProductDetailsSection from '../../components/ProductDetailsSection';
+
+export async function getStaticPaths() {
+  return products.map((product) => ({
+    params: { id: product.id },
+    props: { product }
+  }));
+}
+
+const { product } = Astro.props;
+---
+
+<Layout title={`${product.title} | FlixCart`} description={product.description}>
+  <div class="py-4">
+    <ProductDetailsSection client:load product={product} />
+  </div>
+</Layout>

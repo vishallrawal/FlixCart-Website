@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductListingSection from '../components/ProductListingSection';
+
+const initialSearch = Astro.url.searchParams.get('search') || '';
+const initialCategory = Astro.url.searchParams.get('category') || 'All';
+---
+
+<Layout title="Explore Products | FlixCart">
+  <div class="py-4">
+    <ProductListingSection 
+      client:load 
+      initialSearch={initialSearch} 
+      initialCategory={initialCategory} 
+    />
+  </div>
+</Layout>

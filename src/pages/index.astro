@@ -1,0 +1,208 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NetflixBillboard from '../components/NetflixBillboard';
+import ProductCard from '../components/ProductCard';
+import { products } from '../data/products';
+import { Laptop, Shirt, Home, Dumbbell, ArrowRight } from 'lucide-react';
+
+const dealProducts = products.filter(p => p.isDeal);
+const electronics = products.filter(p => p.category === 'Electronics' && !p.isDeal);
+const fashion = products.filter(p => p.category === 'Fashion' && !p.isDeal);
+const homeLiving = products.filter(p => p.category === 'Home & Living' && !p.isDeal);
+const fitness = products.filter(p => p.category === 'Fitness & Wellness' && !p.isDeal);
+
+const categories = [
+  { name: 'Electronics', icon: Laptop, count: `${products.filter(p => p.category === 'Electronics').length} Products`, color: 'bg-blue-500/10 text-blue-600 border-blue-500/20' },
+  { name: 'Fashion', icon: Shirt, count: `${products.filter(p => p.category === 'Fashion').length} Products`, color: 'bg-rose-500/10 text-rose-600 border-rose-500/20' },
+  { name: 'Home & Living', icon: Home, count: `${products.filter(p => p.category === 'Home & Living').length} Products`, color: 'bg-amber-500/10 text-amber-600 border-amber-500/20' },
+  { name: 'Fitness & Wellness', icon: Dumbbell, count: `${products.filter(p => p.category === 'Fitness & Wellness').length} Products`, color: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20' }
+];
+---
+
+<Layout title="FlixCart | Premium Cinematic Store">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-12">
+    
+    <!-- Cinematic Netflix Billboard Hero Banner -->
+    <NetflixBillboard client:load />
+
+    <!-- Netflix Style Rows of Products -->
+
+    <!-- Row 1: Deals of the Day (Countdown + Horizontal Slider) -->
+    <section class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+        <div class="space-y-1">
+          <span class="inline-block text-[10px] font-extrabold bg-brand-600 text-white px-2.5 py-1 rounded-md uppercase tracking-wider">
+            Cinematic Bestsellers
+          </span>
+          <h2 class="text-2xl font-black text-slate-800 tracking-tight">
+            Trending Blockbusters (Deals of the Day)
+          </h2>
+        </div>
+        
+        {/* Urgent Timer */}
+        <div class="flex items-center gap-2 bg-gradient-to-r from-amber-500/10 via-red-500/10 via-pink-500/10 to-blue-500/10 border border-red-500/20 p-2 px-4 rounded-xl shadow-sm shrink-0 w-fit">
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mr-1">Time Left</span>
+          <div class="flex items-center gap-1 font-mono text-sm font-black">
+            <span id="hours-val" class="text-amber-600">08</span><span class="text-red-500">:</span>
+            <span id="mins-val" class="text-pink-600">42</span><span class="text-red-500">:</span>
+            <span id="secs-val" class="text-emerald-650">19</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Horizontal Slider Row */}
+      <div class="flex gap-6 overflow-x-auto no-scrollbar pb-6 px-1 scroll-smooth snap-x">
+        {dealProducts.map((product) => (
+          <div class="w-[260px] shrink-0 snap-start">
+            <ProductCard product={product} client:load />
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Categories Genre Grids -->
+    <section class="space-y-4 pt-4 border-t border-slate-100">
+      <h2 class="text-xl font-bold tracking-tight text-slate-500">Browse by Genre</h2>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {categories.map((cat) => {
+          const IconComponent = cat.icon;
+          return (
+            <a 
+              href={`/products?category=${encodeURIComponent(cat.name)}`} 
+              class={`flex items-center gap-4 p-5 rounded-2xl border transition-all hover:scale-102 hover:shadow-lg cursor-pointer bg-slate-50/50 border-slate-200/60 hover:border-brand-500/30 text-slate-700`}
+            >
+              <div class="p-3 bg-white rounded-xl shadow-sm border border-slate-100">
+                <IconComponent className="h-6 w-6 text-brand-600" />
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-800 text-base leading-none mb-1">{cat.name}</h3>
+                <span class="text-xs text-slate-450 font-medium">{cat.count}</span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- Row 2: Top Rated in Electronics -->
+    <section class="space-y-4 pt-4 border-t border-slate-100">
+      <div class="flex items-baseline justify-between border-b border-slate-100 pb-2">
+        <h2 class="text-2xl font-black tracking-tight text-slate-800">Top Rated in Electronics</h2>
+        <a href="/products?category=Electronics" class="text-xs font-bold text-brand-600 hover:text-brand-500 flex items-center gap-1 group">
+          View All <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+      
+      <div class="flex gap-6 overflow-x-auto no-scrollbar pb-6 px-1 scroll-smooth snap-x">
+        {electronics.map((product) => (
+          <div class="w-[260px] shrink-0 snap-start">
+            <ProductCard product={product} client:load />
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Mid Promo Poster -->
+    <section class="relative bg-gradient-to-r from-brand-600 to-blue-900 rounded-3xl overflow-hidden py-12 px-8 sm:px-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute -top-12 -left-12 h-64 w-64 rounded-full bg-white blur-3xl"></div>
+        <div class="absolute -bottom-12 -right-12 h-64 w-64 rounded-full bg-white blur-3xl"></div>
+      </div>
+      <div class="relative space-y-3 max-w-xl text-center md:text-left text-white z-10">
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">FlixPass Elite Access</h2>
+        <p class="text-sm text-blue-100 font-medium">
+          Unlock unlimited free deliveries, live catalog overrides, custom vector SVGs, and access to all merchant simulator features automatically.
+        </p>
+      </div>
+      <button class="relative px-6 py-3.5 bg-white hover:bg-slate-150 text-brand-600 rounded-xl text-sm font-extrabold shadow-lg transition-all hover:scale-103 shrink-0 cursor-pointer z-10">
+        Join for Free
+      </button>
+    </section>
+
+    <!-- Row 3: Popular in Apparel & Fashion -->
+    <section class="space-y-4 pt-4 border-t border-slate-100">
+      <div class="flex items-baseline justify-between border-b border-slate-100 pb-2">
+        <h2 class="text-2xl font-black tracking-tight text-slate-800">Popular in Apparel &amp; Fashion</h2>
+        <a href="/products?category=Fashion" class="text-xs font-bold text-brand-600 hover:text-brand-500 flex items-center gap-1 group">
+          View All <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+      
+      <div class="flex gap-6 overflow-x-auto no-scrollbar pb-6 px-1 scroll-smooth snap-x">
+        {fashion.map((product) => (
+          <div class="w-[260px] shrink-0 snap-start">
+            <ProductCard product={product} client:load />
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Row 4: Comfort and Cozy Home Essentials -->
+    <section class="space-y-4 pt-4 border-t border-slate-100">
+      <div class="flex items-baseline justify-between border-b border-slate-100 pb-2">
+        <h2 class="text-2xl font-black tracking-tight text-slate-800">Comfort and Cozy Home Essentials</h2>
+        <a href="/products?category=Home%20%26%20Living" class="text-xs font-bold text-brand-600 hover:text-brand-500 flex items-center gap-1 group">
+          View All <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+      
+      <div class="flex gap-6 overflow-x-auto no-scrollbar pb-6 px-1 scroll-smooth snap-x">
+        {homeLiving.map((product) => (
+          <div class="w-[260px] shrink-0 snap-start">
+            <ProductCard product={product} client:load />
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Row 5: Trending in Fitness & Wellness -->
+    <section class="space-y-4 pt-4 border-t border-slate-100">
+      <div class="flex items-baseline justify-between border-b border-slate-100 pb-2">
+        <h2 class="text-2xl font-black tracking-tight text-slate-800">Trending in Fitness &amp; Wellness</h2>
+        <a href="/products?category=Fitness%20%26%20Wellness" class="text-xs font-bold text-brand-600 hover:text-brand-500 flex items-center gap-1 group">
+          View All <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+      
+      <div class="flex gap-6 overflow-x-auto no-scrollbar pb-6 px-1 scroll-smooth snap-x">
+        {fitness.map((product) => (
+          <div class="w-[260px] shrink-0 snap-start">
+            <ProductCard product={product} client:load />
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<script is:inline>
+  // Setup mock countdown timer
+  let hours = 8;
+  let minutes = 42;
+  let seconds = 19;
+
+  const hoursEl = document.getElementById('hours-val');
+  const minsEl = document.getElementById('mins-val');
+  const secsEl = document.getElementById('secs-val');
+
+  if (hoursEl && minsEl && secsEl) {
+    setInterval(() => {
+      seconds--;
+      if (seconds < 0) {
+        seconds = 59;
+        minutes--;
+        if (minutes < 0) {
+          minutes = 59;
+          hours--;
+          if (hours < 0) {
+            hours = 23;
+          }
+        }
+      }
+      hoursEl.innerText = hours.toString().padStart(2, '0');
+      minsEl.innerText = minutes.toString().padStart(2, '0');
+      secsEl.innerText = seconds.toString().padStart(2, '0');
+    }, 1000);
+  }
+</script>
