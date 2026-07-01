@@ -191,7 +191,7 @@ export default function CartDrawer() {
                 Close Drawer
               </button>
               <a 
-                href="/checkout"
+                href="/FlixCart-Website/checkout"
                 className="flex-1 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-lg shadow-brand-500/20 hover:shadow-brand-500/30 flex items-center justify-center gap-1.5 cursor-pointer text-center"
               >
                 Checkout <ArrowRight className="h-4 w-4" />

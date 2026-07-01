@@ -101,7 +101,7 @@ export default function CheckoutSection() {
           </p>
         </div>
         <a 
-          href="/" 
+          href="/FlixCart-Website/" 
           className="inline-block px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-lg"
         >
           Return to Store
@@ -190,7 +190,7 @@ export default function CheckoutSection() {
 
           <div className="pt-4 flex gap-4 justify-center">
             <a 
-              href="/" 
+              href="/FlixCart-Website/" 
               className="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-lg"
             >
               Continue Shopping

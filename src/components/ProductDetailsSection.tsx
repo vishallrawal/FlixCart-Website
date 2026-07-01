@@ -42,9 +42,9 @@ export default function ProductDetailsSection({ product }: ProductDetailsSection
       
       {/* Breadcrumb */}
       <nav className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-        <a href="/" className="hover:text-brand-600">Home</a>
+        <a href="/FlixCart-Website/" className="hover:text-brand-600">Home</a>
         <ChevronRight className="h-3.5 w-3.5" />
-        <a href="/products" className="hover:text-brand-600">Products</a>
+        <a href="/FlixCart-Website/products" className="hover:text-brand-600">Products</a>
         <ChevronRight className="h-3.5 w-3.5" />
         <a href={`/products?category=${encodeURIComponent(product.category)}`} className="hover:text-brand-600">{product.category}</a>
         <ChevronRight className="h-3.5 w-3.5" />
